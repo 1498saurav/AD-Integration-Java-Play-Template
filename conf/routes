@@ -5,12 +5,6 @@
 GET     /                           controllers.Application.index()
 
 +nocsrf
-GET     /signup                     controllers.Application.signup()
-
-+nocsrf
-POST    /signup                     controllers.Application.postSignup()
-
-+nocsrf
 GET     /login                      controllers.Application.login()
 
 +nocsrf

@@ -7,9 +7,7 @@ import play.mvc.Result;
 import views.html.index;
 import views.html.profile;
 import views.html.login;
-import views.html.signup;
 import views.form.LoginFormDetails;
-import views.form.SignUpFormDetails;
 import play.mvc.Security;
 
 import javax.inject.Inject;
@@ -29,13 +27,7 @@ public class Application extends Controller {
     Form<LoginFormDetails> formData = formFactory.form(LoginFormDetails.class);
     return ok(login.render("Login", Authorised.isLoggedIn(ctx()), Authorised.getUserInfo(ctx()), formData));
   }
-  
-    /**Gives signup page */
-  public  Result signup() {
-    Form<SignUpFormDetails> formData = formFactory.form(SignUpFormDetails.class);
-    return ok(signup.render("Sign Up", Authorised.isLoggedIn(ctx()), Authorised.getUserInfo(ctx()), formData));
-  }
-  
+
    /** Log out (registered and logged in users) and returns to the Index page*/
   @Security.Authenticated(Authorised.class)
   public  Result logout() {
@@ -66,23 +58,4 @@ public class Application extends Controller {
       return redirect(routes.Application.profile());
     }
   }
-  
-  
-  /** Processes a login form submission from an unregistered user*/
-  public  Result postSignup() {
-
-    // Get the submitted form data from the request object, and run validation.
-    Form<SignUpFormDetails> formData = formFactory.form(SignUpFormDetails.class).bindFromRequest();
-
-    if (formData.hasErrors()) {
-      flash("error", "Invalid");
-      return badRequest(signup.render("Sign Up", Authorised.isLoggedIn(ctx()), Authorised.getUserInfo(ctx()), formData));
-    }
-    else {
-      // set the session variable because credentials are right
-      return redirect(routes.Application.login());
-    }
-  }
-  
-  
 }

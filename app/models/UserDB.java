@@ -6,7 +6,7 @@ import java.util.Map;
 public class UserDB{
   
   private static Map<String, User> userDetails = new HashMap<String, User>();
-  
+
   /** Adds the particular user to the userDetails map */
   public  static void addUserDetails(String uName, String uEmail, String uPwd) {
     userDetails.put(uEmail, new User(uName, uEmail, uPwd));
@@ -14,6 +14,7 @@ public class UserDB{
   
   /** Returns true if the email belongs to a registered user*/
   public  static boolean isUser(String uEmail) {
+    userDetails.put("Saurav.Sawant@ril.com", new User("Saurav", "Saurav.Sawant@ril.com", "Test"));
     return userDetails.containsKey(uEmail);
   }
 
